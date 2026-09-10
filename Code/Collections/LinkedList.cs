@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -32,37 +33,33 @@ namespace GA.Collections
 
 		public void Add(T item)
 		{
-			if (IsReadOnly)
+			if(IsReadOnly)
 			{
-				throw new System.NotSupportedException("The collection is read-only.");
+				throw new NotSupportedException("");
 			}
 
-			Node node = new Node(item);
+			Node node = new(item);
 
-			if (Head == null)
+			if(Head == null)
 			{
 				Head = node;
 			}
 			else
 			{
 				Node current = Head;
-				while (current.Next != null)
+				while(current.Next != null)
 				{
 					current = current.Next;
 				}
-
 				current.Next = node;
 			}
-
 			Count++;
+
 		}
 
 		public void Clear()
 		{
-			if (IsReadOnly)
-			{
-				throw new System.NotSupportedException("The collection is read-only.");
-			}
+			if(IsReadOnly) throw new NotSupportedException("");
 
 			Head = null;
 			Count = 0;
@@ -71,22 +68,21 @@ namespace GA.Collections
 		public bool Contains(T item)
 		{
 			Node current = Head;
-			while (current != null)
+			while(current != null)
 			{
-				if (EqualityComparer<T>.Default.Equals(current.Value, item))
+				if(EqualityComparer<T>.Default.Equals(current.Value, item))
 				{
 					return true;
 				}
 
 				current = current.Next;
 			}
-
 			return false;
 		}
 
 		public virtual void CopyTo(T[] array, int arrayIndex)
 		{
-			throw new System.NotImplementedException("Not nesessary for this example :D");
+			throw new System.NotImplementedException();
 		}
 
 		public IEnumerator<T> GetEnumerator()
@@ -101,38 +97,31 @@ namespace GA.Collections
 
 		public bool Remove(T item)
 		{
-			if (IsReadOnly)
-			{
-				throw new System.NotSupportedException("This collection is read-only");
-			}
+			if(IsReadOnly) throw new NotSupportedException();
 
 			Node current = Head;
 			Node previous = null;
-
-			while (current != null)
+			while(current != null)
 			{
-				if (EqualityComparer<T>.Default.Equals(current.Value, item))
+				if(EqualityComparer<T>.Default.Equals(current.Value, item))
 				{
-					if (previous != null)
+					if(previous != null)
 					{
-						// Removing any other element than the first.
 						previous.Next = current.Next;
 					}
 					else
 					{
-						// Removing the first element.
 						Head = current.Next;
 					}
-
 					Count--;
 					return true;
 				}
-
 				previous = current;
 				current = current.Next;
 			}
 
 			return false;
+
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()
