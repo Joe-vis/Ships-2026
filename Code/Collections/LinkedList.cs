@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GA.Collections
 {
@@ -10,6 +11,7 @@ namespace GA.Collections
 		{
 			public T Value { get; set; }
 			public Node Next { get; set; }
+			public Node Previous { get; set; }
 
 			public Node() : this(default(T))
 			{
@@ -26,7 +28,7 @@ namespace GA.Collections
 		/// The head of the linked list. When the list is empty, this will be null.
 		/// </summary>
 		protected Node Head { get; set; } = null;
-
+		protected Node Tail { get; set; } = null;
 		public int Count { get; private set; } = 0;
 
 		public virtual bool IsReadOnly => false;
@@ -43,15 +45,13 @@ namespace GA.Collections
 			if(Head == null)
 			{
 				Head = node;
+				Tail = node;
 			}
 			else
 			{
-				Node current = Head;
-				while(current.Next != null)
-				{
-					current = current.Next;
-				}
-				current.Next = node;
+				Tail.Next = node;
+				node.Previous = Tail;
+				Tail = node;
 			}
 			Count++;
 
@@ -62,6 +62,7 @@ namespace GA.Collections
 			if(IsReadOnly) throw new NotSupportedException("");
 
 			Head = null;
+			Tail = null;
 			Count = 0;
 		}
 
@@ -80,9 +81,64 @@ namespace GA.Collections
 			return false;
 		}
 
+		// for debugging
+		public T GetHead()
+		{
+			return Head.Value;
+		}
+
+		// for debugging
+		public T GetTail()
+		{
+			return Tail.Value;
+		}
+
 		public virtual void CopyTo(T[] array, int arrayIndex)
 		{
-			throw new System.NotImplementedException();
+			if(IsReadOnly) throw new NotSupportedException("");
+			if(arrayIndex > Count || arrayIndex < 0) throw new ArgumentOutOfRangeException("");
+
+			if(arrayIndex == Count) // if tail just use add
+			{
+				foreach(T item in array)
+				{
+					Add(item);
+				}
+				return;
+			}
+
+			bool forward = arrayIndex < ((Count - 1) / 2);
+			Node current = forward ? Head : Tail;
+			int currentIndex = forward ? 0 : Count - 1;
+
+			while(current != null)
+			{
+				if(currentIndex == arrayIndex)
+				{
+					for(int i = 0; i < array.Length; i++)
+					{
+                        Node node = new(array[i])
+                        {
+                            Previous = current.Previous,
+                            Next = current
+                        };
+
+						if(current.Previous != null)
+						{
+							current.Previous.Next = node;
+						}
+						else
+						{
+							Head = node;
+						}
+                        current.Previous = node;
+						Count++;
+					}
+					break;
+				}
+				currentIndex += forward ? 1 : -1;
+				current = forward ? current.Next : current.Previous;
+			}
 		}
 
 		public IEnumerator<T> GetEnumerator()
@@ -100,28 +156,38 @@ namespace GA.Collections
 			if(IsReadOnly) throw new NotSupportedException();
 
 			Node current = Head;
-			Node previous = null;
 			while(current != null)
 			{
 				if(EqualityComparer<T>.Default.Equals(current.Value, item))
 				{
-					if(previous != null)
+					if(current.Next != null && current.Previous != null) // Removing body
 					{
-						previous.Next = current.Next;
+						current.Previous.Next = current.Next;
+						current.Next.Previous = current.Previous;
 					}
-					else
+					else if (current.Previous != null) // Removing Tail
 					{
+						current.Previous.Next = null;
+						Tail = current.Previous;
+					}
+					else if (current.Next != null) // Removing Head
+					{
+						current.Next.Previous = null;
 						Head = current.Next;
 					}
+					else // Removing last element
+					{
+						Head = null;
+						Tail = null;
+					}
+
 					Count--;
 					return true;
 				}
-				previous = current;
 				current = current.Next;
 			}
 
 			return false;
-
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()
