@@ -17,10 +17,11 @@ namespace GA.Collections
 			{
 			}
 
-			public Node(T value, Node next = null)
+			public Node(T value, Node next = null, Node previous = null)
 			{
 				Value = value;
 				Next = next;
+				Previous = previous;
 			}
 		}
 
