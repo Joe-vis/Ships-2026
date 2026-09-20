@@ -12,7 +12,9 @@ namespace GA.Collections
                 throw new ArgumentNullException(nameof(target));
             }
 
-            (target[indexB], target[indexA]) = (target[indexA], target[indexB]);
+            T temp = target[indexA];
+            target[indexA] = target[indexB];
+            target[indexB] = temp;
         }
     }
 }

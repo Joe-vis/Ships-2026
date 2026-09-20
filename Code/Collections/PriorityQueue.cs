@@ -6,11 +6,11 @@ namespace GA.Collections
 {
     public class PriorityQueue<T> where T : IComparable<T>
     {
-        private List<T> _data = [];
+        private List<T> _data = new List<T>();
 
         public int Count => _data.Count;
 
-        public void Enqueu(T item)
+        public void Enqueue(T item)
         {
             _data.Add(item);
             int childIdx = Count - 1;
@@ -36,9 +36,9 @@ namespace GA.Collections
             }
 
             T result = _data[0];
+
             int lastIdx = Count - 1;
             _data[0] = _data[lastIdx];
-
             _data.RemoveAt(lastIdx);
             lastIdx--;
 
@@ -48,6 +48,7 @@ namespace GA.Collections
             {
                 int childIdx = parentIdx * 2 + 1;
                 if(childIdx > lastIdx) break;
+
                 int rightChildIdx = childIdx + 1;
 
                 if(rightChildIdx <= lastIdx &&
@@ -90,12 +91,12 @@ namespace GA.Collections
                 int leftChild   = parentIdx * 2 + 1;
                 int rightChild  = parentIdx * 2 + 2;
 
-                if(leftChild >= lastIdx && _data[parentIdx].CompareTo(_data[leftChild]) > 0)
+                if(leftChild <= lastIdx && _data[parentIdx].CompareTo(_data[leftChild]) > 0)
                 {
                     return false;
                 }
 
-                if(rightChild >= lastIdx && _data[parentIdx].CompareTo(_data[rightChild]) > 0)
+                if(rightChild <= lastIdx && _data[parentIdx].CompareTo(_data[rightChild]) > 0)
                 {
                     return false;
                 }
