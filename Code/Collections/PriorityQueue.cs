@@ -35,24 +35,31 @@ namespace GA.Collections
                 throw new InvalidOperationException("Queue is empty");
             }
 
+            // Save first item
             T result = _data[0];
 
+            // Move last item to the first position
             int lastIdx = Count - 1;
             _data[0] = _data[lastIdx];
             _data.RemoveAt(lastIdx);
             lastIdx--;
 
+            // Bubble down the first item to its correct position
             int parentIdx = 0;
 
             while (true)
             {
+                // Left child index
                 int childIdx = parentIdx * 2 + 1;
+
+                //  Making sure there are more children
                 if(childIdx > lastIdx) break;
 
+                // Getting right child index
                 int rightChildIdx = childIdx + 1;
 
-                if(rightChildIdx <= lastIdx &&
-                    _data[rightChildIdx].CompareTo(_data[childIdx]) < 0)
+                // Checking children for their order
+                if(rightChildIdx <= lastIdx && _data[rightChildIdx].CompareTo(_data[childIdx]) < 0)
                 {
                     childIdx = rightChildIdx;
                 }
@@ -61,7 +68,7 @@ namespace GA.Collections
                 {
                     break;
                 }
-                _data.Swap(parentIdx, parentIdx);
+                _data.Swap(parentIdx, childIdx);
                 parentIdx = childIdx;
             }
 
