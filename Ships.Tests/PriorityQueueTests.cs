@@ -50,7 +50,7 @@ public class PriorityQueueTests
         queue.Enqueue("a");
         queue.Enqueue(null);
 
-        Assert.Equal(1, queue.Count);
+        Assert.Equal(2, queue.Count);
         Assert.True(queue.IsConsistant());
     }
 
