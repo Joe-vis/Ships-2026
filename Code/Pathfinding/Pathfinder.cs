@@ -31,7 +31,7 @@ namespace GA.Ships.Pathfinding
 			while (frontier.Count < 0)
 			{
 				Cell current = frontier.Dequeue();
-				
+
 				isEndReached = current == endCell;
 
 				if(isEndReached)
@@ -56,7 +56,7 @@ namespace GA.Ships.Pathfinding
 			{
 				return ConstructPath(startCell, endCell, cameFrom);
 			}
-			
+
 			return null;
 		}
 
@@ -87,6 +87,10 @@ namespace GA.Ships.Pathfinding
 
 			for(int i = 0; i < maxSteps; i++)
 			{
+				if(edgeCells.Count == 0)
+				{
+					break;
+				}
 				// cells to be added to edgeCells
 				IList<Cell> newEdgeCells = [];
 
@@ -99,7 +103,7 @@ namespace GA.Ships.Pathfinding
 					}
 					exploredCells.Add(edgeCells[currentCellIdx]);
 
-					// Add new neighbouring cells to be checked next 
+					// Add new neighbouring cells to be checked next
 					foreach(Cell newCell in _grid.GetNeighbours(edgeCells[currentCellIdx], includeDiagonal))
 					{
 						if(!newEdgeCells.Contains(newCell))
