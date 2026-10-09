@@ -146,7 +146,7 @@ namespace GA.Ships.Pathfinding
 					}
 
 					Cell neighbour = _cells[candidateX, candidateY];
-					 
+
 					if(neighbour.IsWalkable)
 					{
 						neighbours.Add(neighbour);
@@ -154,6 +154,28 @@ namespace GA.Ships.Pathfinding
 				}
 			}
 			return neighbours;
+		}
+        public int GetCostToNeighbour(Cell source, Cell destination)
+		{
+			if(source == null || destination == null
+			|| !source.IsWalkable || !destination.IsWalkable)
+			{
+				return -1;
+			}
+
+			if(source.X == destination.X && source.Y == destination.Y)
+			{
+				return 0;
+			}
+
+			int xDistance = Mathf.Abs(source.X - destination.X);
+			int yDistance = Mathf.Abs(source.Y - destination.Y);
+			if(xDistance > 1 || yDistance > 1)
+			{
+				return -1;
+			}
+			int multiplier = (xDistance == 1 && yDistance == 1) ? 14 : 10;
+			return destination.Cost * multiplier;
 		}
 
 		/// <summary>
@@ -177,6 +199,21 @@ namespace GA.Ships.Pathfinding
 
 			return _cells[x, y];
 
+		}
+
+		public void ResetPathData()
+		{
+			if(_cells == null || _cells.Length == 0)
+			{
+				return;
+			}
+
+			foreach(Cell cell in _cells)
+			{
+				cell.Parent = null;
+				cell.GCost = int.MaxValue;
+				cell.HCost = 0;
+			}
 		}
 		#region Debug draw
 		private void RefreshDebugGrid()
@@ -260,18 +297,26 @@ namespace GA.Ships.Pathfinding
 			return new Color(0, 1.0f - t, t, 0.75f);
 		}
 
-		#endregion
 
-		/// <summary>
-		/// Represents one cell in the grid graph.
-		/// </summary>
-		public class Cell : IComparable<Cell>
+        #endregion
+
+        /// <summary>
+        /// Represents one cell in the grid graph.
+        /// </summary>
+        public class Cell : IComparable<Cell>
 		{
 			public int X { get; }
 			public int Y { get; }
 			public Vector3 WorldPosition { get; }
 			public int Cost { get; set; }
 			public bool IsWalkable => Cost >= 0;
+			public Cell Parent { get; set; }
+
+			public int GCost { get; set; }
+
+			public int HCost { get; set; }
+
+			public int FCost => GCost == int.MaxValue ? int.MaxValue : GCost + HCost;
 
 			public Cell(int x, int y, Vector3 worldPosition, int cost)
 			{
@@ -283,7 +328,12 @@ namespace GA.Ships.Pathfinding
 
 			public int CompareTo(Cell other)
 			{
-				throw new NotImplementedException();
+				if(other == null)
+				{
+					return -1;
+				}
+
+				return this.FCost - other.FCost;
 			}
 		}
 	}
