@@ -455,4 +455,4 @@ transform = Transform3D(-1.4901161e-08, 1, -2.9802322e-08, 3.7252903e-08, 2.9802
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3195992, 0)
 script = ExtResource("12_rpty4")
 _grid = NodePath("../NavigationGrid")
-_maxSteps = 1
+_maxSteps = 14
