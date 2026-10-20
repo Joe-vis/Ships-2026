@@ -65,6 +65,10 @@ sky_material = SubResource("PanoramaSkyMaterial_k1igm")
 background_mode = 2
 sky = SubResource("Sky_1vj35")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rpty4"]
+transparency = 1
+albedo_color = Color(0.15686275, 0.75686276, 0, 0.48235294)
+
 [node name="Level" type="Node3D" unique_id=1271523175]
 script = ExtResource("1_2h8qs")
 
@@ -85,6 +89,15 @@ environment = SubResource("Environment_lbokr")
 
 [node name="patch-grass2" parent="Islands" unique_id=1184472724 instance=ExtResource("4_kylad")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.858284, -0.0052999854, 43.86017)
+
+[node name="patch-grass5" parent="Islands" unique_id=868947537 instance=ExtResource("4_kylad")]
+transform = Transform3D(3.61, 0, 0, 0, 3.61, 0, 0, 0, 3.61, 7.156212, -0.0052999854, 9.8264675)
+
+[node name="NavigationObject" parent="Islands/patch-grass5/Obstacle" parent_id_path=PackedInt32Array(868947537, 1484415074) index="0" unique_id=1366405276]
+MovementCost = 3
+
+[node name="patch-grass" parent="Islands/patch-grass5" index="1" unique_id=946769489]
+surface_material_override/0 = SubResource("StandardMaterial3D_rpty4")
 
 [node name="patch-grass3" parent="Islands" unique_id=1453875562 instance=ExtResource("4_kylad")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.159199, -0.0052999854, 8.846371)
@@ -447,12 +460,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.04512, 0, -40.84346)
 [node name="NavigationGrid" type="Node3D" parent="." unique_id=1547683577]
 script = ExtResource("10_bdlbp")
 GridSize = Vector2i(100, 100)
+DrawDebugGrid = true
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1951391016]
 transform = Transform3D(-1.4901161e-08, 1, -2.9802322e-08, 3.7252903e-08, 2.9802322e-08, 1, 1, 1.0149505e-08, -4.1124046e-08, -1.5434513, 16.658955, 3.8163e-08)
+projection = 1
+size = 24.28
 
 [node name="CellVisualizer" type="Node3D" parent="." unique_id=2039735518 node_paths=PackedStringArray("_grid")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3195992, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32, 0)
 script = ExtResource("12_rpty4")
 _grid = NodePath("../NavigationGrid")
-_maxSteps = 14
+_maxSteps = 13
+_allowDiagonal = true
+
+[editable path="Islands/patch-grass5"]
+[editable path="Islands/patch-grass5/Obstacle"]

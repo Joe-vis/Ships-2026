@@ -293,8 +293,9 @@ namespace GA.Ships.Pathfinding
 				return new Color(0.1f, 0.8f, 0.2f, 0.65f);
 			}
 
-			float t = Mathf.Clamp(cost / 10f, 0f, 1f);
-			return new Color(0, 1.0f - t, t, 0.75f);
+			float t = Mathf.Clamp(cost / 10f, 0f, 0.65f);
+			return Color.FromHsv(((float)cost + 4f) / 10, 0.875f, 0.400f);
+			
 		}
 
 

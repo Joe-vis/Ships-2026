@@ -9,6 +9,8 @@ public partial class PathfindingVisualizer : Node3D
 {
 	[Export] private NavigationGrid _grid;
 	[Export] private int _maxSteps = 25;
+	[Export] private bool _allowDiagonal = false;
+
 
 	public override void _Ready()
 	{
@@ -46,14 +48,13 @@ public partial class PathfindingVisualizer : Node3D
 	private ArrayMesh BuildPathfindingGrid()
 	{
 		Cell startCell = _grid.GetCell(GlobalPosition);
-		IList<Cell> reachableCells = Level.Current.Pathfinder.GetReachableCells(startCell, _maxSteps, false);
+		IList<Cell> reachableCells = Level.Current.Pathfinder.GetReachableCells(startCell, _maxSteps, _allowDiagonal);
 		
 		var tool = new SurfaceTool();
 		tool.Begin(Mesh.PrimitiveType.Triangles);
 
 		foreach(Cell cell in reachableCells)
 		{
-			GD.Print(cell.WorldPosition);
 			Color color = Colors.Violet;
 			float half = _grid.CellSize * 0.4f;
 			Vector3 offset = cell.WorldPosition - GlobalPosition;
