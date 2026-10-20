@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using GA.Collections;
 using Godot;
 using Cell = GA.Ships.Pathfinding.NavigationGrid.Cell;
@@ -25,7 +26,7 @@ namespace GA.Ships.Pathfinding
 		}
 		private NavigationGrid _grid = null;
 		private PriorityQueue<FrontierEntry> _frontier = new PriorityQueue<FrontierEntry>();
-		private HashSet<Cell> _visited;
+		private HashSet<Cell> _visited = new();
 
 		public Pathfinder(NavigationGrid grid)
 		{
@@ -80,12 +81,13 @@ namespace GA.Ships.Pathfinding
 
 		/// <summary>
 		/// finds every cell that is reachable from the start cell within the max steps
+		/// Uses Breadth First Search algorithm to get all points within reach
 		/// </summary>
 		/// <param name="start">center cell</param>
 		/// <param name="maxSteps">how many steps away from the start cell</param>
 		/// <param name="includeDiagonal">should diagonals be included</param>
 		/// <returns>List of reachable cells</returns>
-		public IList<Cell> GetReachableCells(Cell start, int maxSteps, bool includeDiagonal = false)
+		public IList<Cell> GetReachableCellsBreadthFirst(Cell start, int maxSteps, bool includeDiagonal = false)
 		{
 			if(start == null)
 			{
@@ -200,6 +202,82 @@ namespace GA.Ships.Pathfinding
 				}
 			}
 			return RetracePath(startCell, endCell);
+		}
+
+		/// <summary>
+		/// Gets every cell reachable by maxMovementPoints.
+		/// Uses Dijkstras algorithm to determin which cells are reachable.
+		/// </summary>
+		/// <param name="start">starting cell</param>
+		/// <param name="maxMovementPoints">maximum movement cost from the starting cell</param>
+		/// <param name="useDiagonal">if diagonals should be allowed (check if config allows for diagonals)</param>
+		/// <returns>list of reachable cells</returns>
+		/// <exception cref="ArgumentException"></exception>
+		public IList<Cell> GetReachableCells(Cell start, int maxMovementPoints, bool useDiagonal = PathfindingConfig.AllowDiagonalPathfinding)
+		{
+
+			// Throwing exceptions
+			ArgumentNullException.ThrowIfNull(start);
+			ArgumentOutOfRangeException.ThrowIfNegative(maxMovementPoints);
+			if(!start.IsWalkable)
+			{
+				throw new ArgumentException($"{nameof(start)} should be walkable");
+			}
+
+			// modify movement points to fit standard
+			maxMovementPoints *= 10;
+
+			// clear old data
+			_frontier.Clear();
+			_visited.Clear();
+			_grid.ResetPathData();
+
+			// reset start cells parameters
+			start.Parent = null;
+			start.GCost = 0;
+			start.HCost = 0;
+
+			// loop through cells 
+			_frontier.Enqueue(new FrontierEntry(start, 0));
+			while(_frontier.Count > 0)
+			{
+				Cell current = _frontier.Dequeue().Cell;
+
+				if(!_visited.Add(current))
+				{
+					continue;
+				}
+
+				IList<Cell> neighbours = _grid.GetNeighbours(current, useDiagonal);
+				foreach(Cell neighbour in neighbours)
+				{
+					if(!neighbour.IsWalkable || _visited.Contains(neighbour))
+					{
+						continue;
+					}
+
+					int costToNeighbour = _grid.GetCostToNeighbour(current, neighbour);
+					if(costToNeighbour <= 0)
+					{
+						continue;
+					}
+
+					int costSoFar = costToNeighbour + current.GCost;
+					if(costSoFar < neighbour.GCost)
+					{
+						neighbour.GCost = costSoFar;
+						neighbour.HCost = 0;
+
+						neighbour.Parent = current;
+						if(costSoFar <= maxMovementPoints)
+						{
+							_frontier.Enqueue(new FrontierEntry(neighbour, costSoFar));	
+						}
+					}
+				}
+			}
+			_visited.Remove(start);
+			return _visited.ToList();
 		}
 
 		#region A*
