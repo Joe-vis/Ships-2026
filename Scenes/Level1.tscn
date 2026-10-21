@@ -12,6 +12,13 @@
 [ext_resource type="PackedScene" uid="uid://gb82qf7sjrcg" path="res://Scenes/LevelObjects/Rock3.tscn" id="9_06um6"]
 [ext_resource type="Script" uid="uid://twpevo5fy722" path="res://Code/Pathfinding/NavigationGrid.cs" id="10_bdlbp"]
 [ext_resource type="Script" uid="uid://wtilkk2ycr1g" path="res://Code/Pathfinding/PathfindingVisualizer.cs" id="12_rpty4"]
+[ext_resource type="PackedScene" uid="uid://cqy7iney1q5mc" path="res://Scenes/Ships/PlayerShip.tscn" id="13_6jj8j"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_06um6"]
+frequency = 0.008
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6jj8j"]
+noise = SubResource("FastNoiseLite_06um6")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_3vykb"]
 
@@ -46,10 +53,15 @@ shader_parameter/normalmap_b_strength = 0.4
 shader_parameter/movement_direction = Vector2(0.1, 0.1)
 shader_parameter/movement_strength = 0.5
 shader_parameter/uv_scale = 1.0
+shader_parameter/noise = SubResource("NoiseTexture2D_6jj8j")
+shader_parameter/speed = 0.1
+shader_parameter/magnitude = 10.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1vj35"]
 material = SubResource("ShaderMaterial_k1igm")
 size = Vector2(100, 100)
+subdivide_width = 100
+subdivide_depth = 100
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lbokr"]
 material = ExtResource("2_joc8x")
@@ -96,7 +108,7 @@ transform = Transform3D(3.61, 0, 0, 0, 3.61, 0, 0, 0, 3.61, 7.156212, -0.0052999
 [node name="NavigationObject" parent="Islands/patch-grass5/Obstacle" parent_id_path=PackedInt32Array(868947537, 1484415074) index="0" unique_id=1366405276]
 MovementCost = 3
 
-[node name="patch-grass" parent="Islands/patch-grass5" index="1" unique_id=946769489]
+[node name="patch-grass" parent="Islands/patch-grass5" index="1" unique_id=77383776]
 surface_material_override/0 = SubResource("StandardMaterial3D_rpty4")
 
 [node name="patch-grass3" parent="Islands" unique_id=1453875562 instance=ExtResource("4_kylad")]
@@ -460,7 +472,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.04512, 0, -40.84346)
 [node name="NavigationGrid" type="Node3D" parent="." unique_id=1547683577]
 script = ExtResource("10_bdlbp")
 GridSize = Vector2i(100, 100)
-DrawDebugGrid = true
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1951391016]
 transform = Transform3D(-1.4901161e-08, 1, -2.9802322e-08, 3.7252903e-08, 2.9802322e-08, 1, 1, 1.0149505e-08, -4.1124046e-08, -1.5434513, 16.658955, 3.8163e-08)
@@ -473,6 +484,9 @@ script = ExtResource("12_rpty4")
 _grid = NodePath("../NavigationGrid")
 _maxSteps = 13
 _allowDiagonal = true
+
+[node name="Smallship" parent="." unique_id=983467251 instance=ExtResource("13_6jj8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.557903, 0, 26.715279)
 
 [editable path="Islands/patch-grass5"]
 [editable path="Islands/patch-grass5/Obstacle"]

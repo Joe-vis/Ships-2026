@@ -18,12 +18,21 @@ uniform vec2 movement_direction = vec2(0.1, 0.1);
 uniform float movement_strength = 0.5;
 uniform float uv_scale = 1.0;
 
+// Vertvex
+uniform sampler2D noise : repeat_enable;
+uniform float speed = 0.1f;
+uniform float magnitude = 0.1f;
+
 // Calculates the strength of the colour based on the viewing angle.
 float fresnel(float amount, vec3 normal, vec3 view)
 {
 	return pow((1.0 - clamp(dot(normalize(normal), normalize(view)), 0.0, 1.0)), amount);
 }
 
+void vertex() 
+{
+	VERTEX = VERTEX + texture(noise, UV + TIME * speed).rgb * magnitude;
+}
 // Also known as Pixer Shader
 void fragment() {
 	// Called for every pixel the material is visible on.
