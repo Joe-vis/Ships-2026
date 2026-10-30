@@ -17,7 +17,7 @@ namespace GA.Ships.Pathfinding.Testing
 		{
 			NavigationGrid.Cell startCell = Level.Current.Grid.GetCell(GlobalPosition);
 			var cells = Level.Current.Pathfinder.GetReachableCells(startCell, _distance, _includeDiagonals);
-			Level.Current.Grid.SetHighlightedCells(cells);
+			// Level.Current.Grid.SetHighlightedCells(cells);
 		}
 	}
 }

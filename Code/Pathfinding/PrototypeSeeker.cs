@@ -4,6 +4,7 @@ using GA.Common;
 using System.Diagnostics;
 using System;
 using GA.Ships.Pathfinding;
+using GA.Ships;
 
 namespace GA.Ships.Navigation
 {
