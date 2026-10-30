@@ -1,4 +1,4 @@
-using Ga.Ships;
+using GA.Ships;
 using GA.Ships.Pathfinding;
 using Godot;
 using System;
@@ -49,7 +49,7 @@ public partial class PathfindingVisualizer : Node3D
 	{
 		Cell startCell = _grid.GetCell(GlobalPosition);
 		IList<Cell> reachableCells = Level.Current.Pathfinder.GetReachableCells(startCell, _maxSteps, _allowDiagonal);
-		
+
 		var tool = new SurfaceTool();
 		tool.Begin(Mesh.PrimitiveType.Triangles);
 

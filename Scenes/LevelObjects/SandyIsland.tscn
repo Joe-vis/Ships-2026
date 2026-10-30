@@ -10,5 +10,6 @@ points = PackedVector3Array(0.36772683, -0.061399996, -3.0794997, -3.9295998, -0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1" unique_id=1025810861]
 shape = SubResource("ConvexPolygonShape3D_j1gdw")
+debug_color = Color(0.88507456, 0.33292452, 3.85046e-07, 0.41960785)
 
-[node name="Obstacle" parent="." index="2" unique_id=1484415074 instance=ExtResource("2_j1gdw")]
+[node name="NavigationObject" parent="." index="2" unique_id=1017269658 instance=ExtResource("2_j1gdw")]

@@ -12,4 +12,4 @@ size = Vector3(4.1206055, 3.4277039, 4.3569336)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.021240234, 1.7098846, 0.038330078)
 shape = SubResource("BoxShape3D_yky2d")
 
-[node name="Obstacle" parent="." index="2" unique_id=1484415074 instance=ExtResource("2_uxqa4")]
+[node name="NavigationObject" parent="." index="2" unique_id=1017269658 instance=ExtResource("2_uxqa4")]

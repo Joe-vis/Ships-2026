@@ -4,7 +4,7 @@ using Godot;
 namespace GA.Ships.Pathfinding;
 
 [GlobalClass]
-public partial class SimplifyPath : PathPostProcessorResource
+public partial class SimplifyPath : PathPostprocessorResource
 {
     public override IList<Vector3> PostProcess(IList<Vector3> path)
     {

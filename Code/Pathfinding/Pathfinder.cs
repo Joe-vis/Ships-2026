@@ -237,7 +237,7 @@ namespace GA.Ships.Pathfinding
 			start.GCost = 0;
 			start.HCost = 0;
 
-			// loop through cells 
+			// loop through cells
 			_frontier.Enqueue(new FrontierEntry(start, 0));
 			while(_frontier.Count > 0)
 			{
@@ -271,7 +271,7 @@ namespace GA.Ships.Pathfinding
 						neighbour.Parent = current;
 						if(costSoFar <= maxMovementPoints)
 						{
-							_frontier.Enqueue(new FrontierEntry(neighbour, costSoFar));	
+							_frontier.Enqueue(new FrontierEntry(neighbour, costSoFar));
 						}
 					}
 				}

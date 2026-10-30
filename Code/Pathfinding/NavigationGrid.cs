@@ -198,7 +198,6 @@ namespace GA.Ships.Pathfinding
 			int y = Mathf.Clamp(Mathf.FloorToInt(positionY / CellSize), 0, Height - 1);
 
 			return _cells[x, y];
-
 		}
 
 		public void ResetPathData()
@@ -295,7 +294,7 @@ namespace GA.Ships.Pathfinding
 
 			float t = Mathf.Clamp(cost / 10f, 0f, 0.65f);
 			return Color.FromHsv(((float)cost + 4f) / 10, 0.875f, 0.400f);
-			
+
 		}
 
 

@@ -11,4 +11,4 @@ points = PackedVector3Array(1.5963037, -0.061399996, 3.0604997, 0.36772683, -0.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1" unique_id=1071585337]
 shape = SubResource("ConvexPolygonShape3D_onbno")
 
-[node name="Obstacle" parent="." index="2" unique_id=1484415074 instance=ExtResource("2_onbno")]
+[node name="NavigationObject" parent="." index="2" unique_id=1017269658 instance=ExtResource("2_onbno")]

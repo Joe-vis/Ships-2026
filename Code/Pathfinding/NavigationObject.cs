@@ -2,7 +2,7 @@ using Godot;
 
 namespace GA.Ships.Pathfinding
 {
-	
+
 	public partial class NavigationObject : Node3D
 	{
 		[Export] public int MovementCost { get; set; } = 1;

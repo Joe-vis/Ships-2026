@@ -3,7 +3,7 @@ using Godot;
 using GA.Common;
 using System.IO;
 
-namespace Ga.Ships
+namespace GA.Ships
 {
 	public partial class Level : Node3D
 	{
@@ -14,11 +14,12 @@ namespace Ga.Ships
 		#endregion
 
 		[Export] private NavigationGrid _grid = null;
+		public NavigationGrid Grid => _grid;
 
 
 		public Pathfinder Pathfinder
 		{
-			get; 
+			get;
 			set;
 		}
 
@@ -36,6 +37,5 @@ namespace Ga.Ships
 
 			Pathfinder = new Pathfinder(_grid);
 		}
-
 	}
 }
