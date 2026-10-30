@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PatrolPathAction" format=3 uid="uid://02wsjgko4cky"]
+
+[ext_resource type="Script" uid="uid://dc7hnvf72jjh1" path="res://Code/Ship/EnemyAI/Actions/PatrolPathAction.cs" id="1_xpd3d"]
+
+[resource]
+script = ExtResource("1_xpd3d")
+metadata/_custom_type_script = "uid://dc7hnvf72jjh1"

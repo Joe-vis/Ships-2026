@@ -21,7 +21,7 @@ namespace GA.Ships.Navigation
 		[Export] private PathfinderAlgorithm _algorithm = PathfinderAlgorithm.None;
 		[Export] Node3D _targetNode = null;
 		[Export] private float _pathfinderTimeStep = 1.0f;
-		[Export] private PathPostprocessorResource[] _postProcessors = null;
+		[Export] private PathPostProcessorResource[] _postProcessors = null;
 
 		private IList<Vector3> _currentPath = null;
 		private PathDebugDrawer _pathDebugDrawer = null;
