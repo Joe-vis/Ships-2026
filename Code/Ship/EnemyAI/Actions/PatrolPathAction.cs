@@ -13,15 +13,27 @@ public partial class PatrolPathAction : AIActionBase
     }
     public override void Act(EnemyShip ship, float deltaTime = 0)
     {
-        if(ship == null || ship.Brain == null || !ship.IsPathValid)
+        if (ship == null || ship.Brain == null || !ship.IsPatrolPathValid)
         {
             return;
         }
 
         Waypoint currentWaypoint = ship.PatrolPath.GetWaypoint(ship.CurrentWaypointIndex);
 
-        bool arrived = ship.Target == currentWaypoint
-            && ship.PathfindingPath.Count == 0
-            && ship.GlobalPosition.DistanceSquaredTo(currentWaypoint.TargetPosition) <= SqrArrivalDistance;
+        bool arrived = HasArrived(ship, currentWaypoint);
+        if (arrived)
+        {
+            ship.AdvancePatrolIndex();
+            currentWaypoint = ship.PatrolPath.GetWaypoint(ship.CurrentWaypointIndex);
+        }
+
+        ship.Target = currentWaypoint;
+    }
+
+    private bool HasArrived(EnemyShip ship, Waypoint currentWaypoint)
+    {
+        return ship.Target == currentWaypoint
+                    && ship.PathfindingPath.Count == 0
+                    && ship.GlobalPosition.DistanceSquaredTo(currentWaypoint.TargetPosition) <= SqrArrivalDistance;
     }
 }

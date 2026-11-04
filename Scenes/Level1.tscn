@@ -41,7 +41,7 @@ seamless = true
 as_normal_map = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k1igm"]
-render_priority = 0
+render_priority = -1
 shader = ExtResource("1_q12u6")
 shader_parameter/primary_color = Color(0, 0.84705883, 0.92941177, 1)
 shader_parameter/roughness = 0.4
@@ -474,7 +474,7 @@ script = ExtResource("10_bdlbp")
 GridSize = Vector2i(100, 100)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1951391016]
-transform = Transform3D(-1.4901161e-08, 1, -2.9802322e-08, 3.7252903e-08, 2.9802322e-08, 1, 1, 1.0149505e-08, -4.1124046e-08, -1.5434513, 16.658955, 3.8163e-08)
+transform = Transform3D(-1.4901161e-08, 1, -2.9802322e-08, 3.7252903e-08, 2.9802322e-08, 1, 1, 1.490116e-08, -3.7252903e-08, -1.5434513, 16.658955, 3.8163e-08)
 projection = 1
 size = 24.28
 
