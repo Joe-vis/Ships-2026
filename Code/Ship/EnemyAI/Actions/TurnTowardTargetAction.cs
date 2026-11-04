@@ -15,9 +15,7 @@ namespace GA.Ships
 			}
 
 			Vector3 forward = ship.GlobalBasis.Z;
-			Vector3 targetPosition = ship.IsPathfindingPathValid
-				? ship.CurrentPathfindingTarget
-				: ship.Target.TargetPosition;
+			Vector3 targetPosition = ship.CurrentPathfindingTarget;
 			Vector3 toTarget = targetPosition - ship.GlobalPosition;
 			toTarget.Y = 0;
 

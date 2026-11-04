@@ -43,7 +43,7 @@ namespace GA.Ships
 		{
 			get
 			{
-				return _pathfindingPath.Count > 0
+				return IsPathfindingPathValid
 					? _pathfindingPath[0]
 					: Target != null
 						? Target.TargetPosition
