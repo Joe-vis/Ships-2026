@@ -13,7 +13,7 @@ namespace GA.Ships
 		[Export] private PatrolPath _patrolPath = null;
 		#region Pathfinding
 		private float _pathfindingTimer = 0;
-		private List<Vector3> _pathfindingPath => null;
+		private List<Vector3> _pathfindingPath = new List<Vector3>();
 		[Export] private PathPostProcessorResource[] _pathPostProcessors = null;
 		#endregion
 

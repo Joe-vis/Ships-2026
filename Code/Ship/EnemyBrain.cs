@@ -10,8 +10,25 @@ namespace GA.Ships
 
 		private EnemyShip _owner = null;
 		private Dictionary<AIStateID, AIState> _stateLookup = new Dictionary<AIStateID, AIState>();
-
 		public AIState CurrentState { get; private set; } = null;
+
+		public override void _Process(double delta)
+		{
+			CurrentState.UpdateState(_owner, Ships.ProcessMode.Frame, (float) delta);
+			AIStateID targetStateID = CurrentState.TryTransitioning(_owner);
+			if(targetStateID != null)
+			{
+				if(!ChangeState(targetStateID))
+				{
+					GD.PushWarning($"Can't transition from {CurrentState.ID} to {targetStateID}");
+				}
+			}
+		}
+
+		public override void _PhysicsProcess(double delta)
+		{
+			CurrentState.UpdateState(_owner, Ships.ProcessMode.PhysicsFrame, (float) delta);
+		}
 
 		public void Initialize(EnemyShip owner)
 		{
@@ -19,7 +36,11 @@ namespace GA.Ships
 			if (_states != null)
 			{
 				_stateLookup = _states.BuildLookup();
-				// TODO: Activate initial state.
+				if(!ChangeState(_initialStateID))
+				{
+					GD.PrintErr("Can't activate initial state");
+				}
+
 			}
 			else
 			{

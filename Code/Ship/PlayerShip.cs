@@ -10,10 +10,10 @@ namespace GA.Ships
 			Vector3 velocity = Velocity;
 
 			// Add the gravity.
-			if (!IsOnFloor())
-			{
-				velocity += GetGravity() * deltaTime;
-			}
+			// if (!IsOnFloor())
+			// {
+			// 	velocity += GetGravity() * deltaTime;
+			// }
 
 			// Get the input direction and handle the movement/deceleration.
 			// As good practice, you should replace UI actions with custom gameplay actions.

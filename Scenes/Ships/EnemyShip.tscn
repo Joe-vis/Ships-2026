@@ -4,15 +4,24 @@
 [ext_resource type="Script" uid="uid://c0rxfmwdfuk4l" path="res://Code/Ship/EnemyShip.cs" id="2_elvtu"]
 [ext_resource type="Script" uid="uid://bbeubhgnw3on" path="res://Code/Ship/ShipVisual.cs" id="2_sypwe"]
 [ext_resource type="Script" uid="uid://bmmpjjonaog84" path="res://Code/Ship/EnemyBrain.cs" id="4_diwfk"]
+[ext_resource type="Resource" uid="uid://8hf60kwk604f" path="res://Data/EnemyAI/States/Patrol.tres" id="5_2b00d"]
+[ext_resource type="Resource" uid="uid://d0omr00ixowl5" path="res://Data/EnemyAI/States/Chase.tres" id="6_kvqdo"]
+[ext_resource type="Script" uid="uid://ho260sd1auvl" path="res://Code/Ship/EnemyAI/AIStateSet.cs" id="7_e6xtg"]
+[ext_resource type="Resource" uid="uid://vsdy5obma0i6" path="res://Data/EnemyAI/States/IDs/PatrolID.tres" id="8_5obky"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_34l84"]
 radius = 2.1430664
 height = 7.6814575
 
+[sub_resource type="Resource" id="Resource_b1trr"]
+script = ExtResource("7_e6xtg")
+States = [ExtResource("5_2b00d"), ExtResource("6_kvqdo")]
+metadata/_custom_type_script = "uid://ho260sd1auvl"
+
 [node name="SmallPirateShip" unique_id=1141487921 instance=ExtResource("1_34l84")]
 script = ExtResource("2_elvtu")
 
-[node name="ship-pirate-small" parent="." index="0" unique_id=1080368293]
+[node name="ship-pirate-small" parent="." index="0" unique_id=358269408]
 script = ExtResource("2_sypwe")
 _floatAmplitude = 0.25
 _rollFrequency = 0.5
@@ -25,3 +34,5 @@ debug_color = Color(0.8276356, 0.0015378738, 0.9516199, 0.41960785)
 
 [node name="Brain" type="Node" parent="." index="2" unique_id=1125487882]
 script = ExtResource("4_diwfk")
+_states = SubResource("Resource_b1trr")
+_initialStateID = ExtResource("8_5obky")

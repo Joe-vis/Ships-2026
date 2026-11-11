@@ -12,7 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://gb82qf7sjrcg" path="res://Scenes/LevelObjects/Rock3.tscn" id="9_06um6"]
 [ext_resource type="Script" uid="uid://twpevo5fy722" path="res://Code/Pathfinding/NavigationGrid.cs" id="10_bdlbp"]
 [ext_resource type="Script" uid="uid://wtilkk2ycr1g" path="res://Code/Pathfinding/PathfindingVisualizer.cs" id="12_rpty4"]
+[ext_resource type="Script" uid="uid://dcd87n363xavl" path="res://Code/FollowCamera.cs" id="12_ubfni"]
 [ext_resource type="PackedScene" uid="uid://cqy7iney1q5mc" path="res://Scenes/Ships/PlayerShip.tscn" id="13_6jj8j"]
+[ext_resource type="PackedScene" uid="uid://t28oc6yqfvp2" path="res://Scenes/Ships/EnemyShip.tscn" id="14_06um6"]
+[ext_resource type="Resource" uid="uid://dp7egbqp41vi2" path="res://Data/PlayerShipData.tres" id="15_ug0sv"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_06um6"]
 frequency = 0.008
@@ -473,10 +476,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.04512, 0, -40.84346)
 script = ExtResource("10_bdlbp")
 GridSize = Vector2i(100, 100)
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1951391016]
-transform = Transform3D(-1.4901161e-08, 1, -2.9802322e-08, 3.7252903e-08, 2.9802322e-08, 1, 1, 1.490116e-08, -3.7252903e-08, -1.5434513, 16.658955, 3.8163e-08)
-projection = 1
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1951391016 node_paths=PackedStringArray("_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.0281944, 0)
 size = 24.28
+script = ExtResource("12_ubfni")
+_target = NodePath("../Smallship")
+_maxDistance = 25.0
+_elevationAngle = -33.59
+_yawAngle = 0.0
 
 [node name="CellVisualizer" type="Node3D" parent="." unique_id=2039735518 node_paths=PackedStringArray("_grid")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32, 0)
@@ -486,7 +493,11 @@ _maxSteps = 13
 _allowDiagonal = true
 
 [node name="Smallship" parent="." unique_id=983467251 instance=ExtResource("13_6jj8j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.557903, 0, 26.715279)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.557903, 1.0430346, 26.715279)
+_shipData = ExtResource("15_ug0sv")
+
+[node name="SmallPirateShip" parent="." unique_id=1141487921 instance=ExtResource("14_06um6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.580341, 3.5412178, -11.882111)
 
 [editable path="Islands/patch-grass5"]
 [editable path="Islands/patch-grass5/Obstacle"]

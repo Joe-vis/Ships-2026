@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MoveTowardTargetAction" format=3 uid="uid://4nxdtvqpaaa1"]
+
+[ext_resource type="Script" uid="uid://bokmp25r4tbbf" path="res://Code/Ship/EnemyAI/Actions/MoveTowardTargetAction.cs" id="1_jkbh1"]
+
+[sub_resource type="Curve" id="Curve_3cw8l"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.0639161, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("1_jkbh1")
+_angleSpeedCurve = SubResource("Curve_3cw8l")
+_maxAngle = 1.5707963267948966
+_breakingDistance = 0.06653975
+metadata/_custom_type_script = "uid://bokmp25r4tbbf"
