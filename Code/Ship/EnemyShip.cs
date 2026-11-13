@@ -51,6 +51,12 @@ namespace GA.Ships
 			}
 		}
 
+		public Vector3 CurrentPathfindingDirection
+		{
+			get;
+			set;
+		}
+
 		public override void _Ready()
 		{
 			base._Ready();
@@ -94,11 +100,12 @@ namespace GA.Ships
 				}
 			}
 
-			Level.Current.DrawPath(pathfindingPath);
 			foreach(Vector3 cellPosition in pathfindingPath)
 			{
 				_pathfindingPath.Add(cellPosition);
 			}
+			Level.Current.DrawPath(_pathfindingPath);
+
 		}
 
 		public void AdvancePatrolIndex()
@@ -115,8 +122,20 @@ namespace GA.Ships
 		{
 			if(_pathfindingPath != null && _pathfindingPath.Count > 0)
 			{
+				if(_pathfindingPath.Count > 1)
+				{
+					CurrentPathfindingDirection = (_pathfindingPath[1] - _pathfindingPath[0]).Normalized();
+				}
 				_pathfindingPath.RemoveAt(0);
 			}
+		}
+
+		public void ClearNavigationData()
+		{
+			_pathfindingPath.Clear();
+			CurrentWaypointIndex = 0;
+			_pathfindingTimer = 0;
+			CurrentPathfindingDirection = Vector3.Zero;
 		}
 	}
 }

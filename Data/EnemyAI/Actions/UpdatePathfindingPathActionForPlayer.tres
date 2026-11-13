@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="UpdatePathfindingPathAction" format=3 uid="uid://b6pbixhi4htuy"]
+
+[ext_resource type="Script" uid="uid://o1efswonb3rh" path="res://Code/Ship/EnemyAI/Actions/UpdatePathfindingPathAction.cs" id="1_sb58w"]
+
+[resource]
+script = ExtResource("1_sb58w")
+ProcessMode = 1
+metadata/_custom_type_script = "uid://o1efswonb3rh"

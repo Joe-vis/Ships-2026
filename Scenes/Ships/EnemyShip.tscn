@@ -3,15 +3,19 @@
 [ext_resource type="PackedScene" uid="uid://bijs15liy45tx" path="res://Art/Models/GLB format/ship-pirate-small.glb" id="1_34l84"]
 [ext_resource type="Script" uid="uid://c0rxfmwdfuk4l" path="res://Code/Ship/EnemyShip.cs" id="2_elvtu"]
 [ext_resource type="Script" uid="uid://bbeubhgnw3on" path="res://Code/Ship/ShipVisual.cs" id="2_sypwe"]
+[ext_resource type="Resource" uid="uid://ct50ivg3y3mii" path="res://Data/SimplifyPath.tres" id="3_5obky"]
 [ext_resource type="Script" uid="uid://bqxq3qvijcovc" path="res://Code/Ship/ShipData.cs" id="3_kvqdo"]
 [ext_resource type="Script" uid="uid://bmmpjjonaog84" path="res://Code/Ship/EnemyBrain.cs" id="4_diwfk"]
 [ext_resource type="Resource" uid="uid://8hf60kwk604f" path="res://Data/EnemyAI/States/Patrol.tres" id="5_2b00d"]
+[ext_resource type="PackedScene" uid="uid://28bsh6lqsv5x" path="res://Art/Models/GLB format/cannon.glb" id="5_e6xtg"]
 [ext_resource type="Resource" uid="uid://d0omr00ixowl5" path="res://Data/EnemyAI/States/Chase.tres" id="6_kvqdo"]
 [ext_resource type="Script" uid="uid://ho260sd1auvl" path="res://Code/Ship/EnemyAI/AIStateSet.cs" id="7_e6xtg"]
 [ext_resource type="Resource" uid="uid://vsdy5obma0i6" path="res://Data/EnemyAI/States/IDs/PatrolID.tres" id="8_5obky"]
 
 [sub_resource type="Resource" id="Resource_0wsr5"]
 script = ExtResource("3_kvqdo")
+MovementSpeed = 8.0
+RotationSpeed = 45.0
 metadata/_custom_type_script = "uid://bqxq3qvijcovc"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_34l84"]
@@ -25,6 +29,7 @@ metadata/_custom_type_script = "uid://ho260sd1auvl"
 
 [node name="SmallPirateShip" unique_id=1141487921 instance=ExtResource("1_34l84")]
 script = ExtResource("2_elvtu")
+_pathPostProcessors = Array[Resource]([ExtResource("3_5obky")])
 _shipData = SubResource("Resource_0wsr5")
 
 [node name="ship-pirate-small" parent="." index="0" unique_id=358269408]
@@ -32,6 +37,12 @@ script = ExtResource("2_sypwe")
 _floatAmplitude = 0.25
 _rollFrequency = 0.5
 _rollAmplitude = 3.0
+
+[node name="cannon2" parent="ship-pirate-small" index="3" unique_id=893520834 instance=ExtResource("5_e6xtg")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.5724776, 2, -0.53935945)
+
+[node name="cannon3" parent="ship-pirate-small" index="4" unique_id=818190484 instance=ExtResource("5_e6xtg")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.5660993, 2, -0.53935945)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1" unique_id=1361578906]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.9287008, -0.12185669)

@@ -21,6 +21,7 @@ public partial class IsPlayerInRangeCondition : AIConditionBase
 
 		float distanceSqr = ship.GlobalPosition.DistanceSquaredTo(player.GlobalPosition);
 
-		return distanceSqr <= DetectionRangeSqr;
+		bool decision = distanceSqr <= DetectionRangeSqr;
+		return InvertDecision ? !decision : decision;
 	}
 }

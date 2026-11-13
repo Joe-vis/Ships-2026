@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="IsPlayerInRangeCondition" format=3 uid="uid://c2q2f7qo44t1"]
+
+[ext_resource type="Script" uid="uid://yjxihu0rd5fc" path="res://Code/Ship/EnemyAI/Conditions/IsPlayerInRangeCondition.cs" id="1_iwwgo"]
+
+[resource]
+script = ExtResource("1_iwwgo")
+_invertDecision = true
+metadata/_custom_type_script = "uid://yjxihu0rd5fc"

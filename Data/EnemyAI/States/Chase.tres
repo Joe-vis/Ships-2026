@@ -2,8 +2,19 @@
 
 [ext_resource type="Resource" uid="uid://ex2xu2kxjlml" path="res://Data/EnemyAI/States/IDs/ChaseID.tres" id="1_5xjhj"]
 [ext_resource type="Script" uid="uid://c8wl0t4x2j4cd" path="res://Code/Ship/EnemyAI/AIState.cs" id="1_8o2kh"]
+[ext_resource type="Resource" uid="uid://civ282cokgblx" path="res://Data/EnemyAI/Actions/SetPlayerTargetAction.tres" id="1_x4luv"]
+[ext_resource type="Resource" uid="uid://cgau5b5vcrxpi" path="res://Data/EnemyAI/Actions/ClearNavigationData.tres" id="2_nfnt2"]
+[ext_resource type="Resource" uid="uid://b6pbixhi4htuy" path="res://Data/EnemyAI/Actions/UpdatePathfindingPathActionForPlayer.tres" id="3_cdh22"]
+[ext_resource type="Resource" uid="uid://xyocogw3f1he" path="res://Data/EnemyAI/Actions/FollowPathfindingPathAction.tres" id="4_pcuwm"]
+[ext_resource type="Resource" uid="uid://kg7205tietiw" path="res://Data/EnemyAI/Actions/TurnTowardTargetAction.tres" id="5_fo66b"]
+[ext_resource type="Resource" uid="uid://4nxdtvqpaaa1" path="res://Data/EnemyAI/Actions/MoveTowardTargetAction.tres" id="6_nfnt2"]
+[ext_resource type="Resource" uid="uid://0hw06lsco3w6" path="res://Data/EnemyAI/Transitions/ChaseToPatrol.tres" id="7_fo66b"]
 
 [resource]
 script = ExtResource("1_8o2kh")
 ID = ExtResource("1_5xjhj")
+EnterActions = [ExtResource("1_x4luv")]
+RunActions = [ExtResource("3_cdh22"), ExtResource("4_pcuwm"), ExtResource("5_fo66b"), ExtResource("6_nfnt2")]
+ExitActions = [ExtResource("2_nfnt2")]
+Transitions = [ExtResource("7_fo66b")]
 metadata/_custom_type_script = "uid://c8wl0t4x2j4cd"

@@ -19,7 +19,7 @@ namespace GA.Ships
 			Vector3 toTarget = targetPosition - ship.GlobalPosition;
 			toTarget.Y = 0;
 
-			if(toTarget.LengthSquared() <= DistanceMarginSqr)
+			if(toTarget.LengthSquared() < DistanceMarginSqr)
 			{
 				return;
 			}
@@ -27,7 +27,7 @@ namespace GA.Ships
 			float currentYaw = Mathf.Atan2(forward.X, forward.Z);
 			float delta = Mathf.Wrap(targetYaw - currentYaw, -Mathf.Pi, Mathf.Pi);
 
-			float maxTurn = Mathf.DegToRad(ship.ShipData.RotationSpeed) * _turnSpeedMultiplier * deltaTime;
+			float maxTurn = Mathf.DegToRad(ship.ShipData.RotationSpeed * _turnSpeedMultiplier * deltaTime);
 			float turnAmount = Mathf.Clamp(delta, -maxTurn, maxTurn);
 
 			ship.RotateY(turnAmount);

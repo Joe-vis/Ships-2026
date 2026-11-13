@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AITransition" format=3 uid="uid://dhjtygi5suf76"]
 
-[ext_resource type="Resource" uid="uid://bftwtxad4414r" path="res://Data/EnemyAI/ConditionStates/IsPlayerInRangeCondition.tres" id="1_687ms"]
+[ext_resource type="Resource" uid="uid://bftwtxad4414r" path="res://Data/EnemyAI/Conditions/IsPlayerInRangeCondition.tres" id="1_687ms"]
 [ext_resource type="Script" uid="uid://dnpmv23pscj8t" path="res://Code/Ship/EnemyAI/AITransition.cs" id="1_u10th"]
 [ext_resource type="Resource" uid="uid://ex2xu2kxjlml" path="res://Data/EnemyAI/States/IDs/ChaseID.tres" id="2_t3oh0"]
 

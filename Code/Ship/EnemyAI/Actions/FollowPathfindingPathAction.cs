@@ -20,10 +20,22 @@ namespace GA.Ships
 				return;
 			}
 
-			if (ship.GlobalPosition.DistanceSquaredTo(ship.CurrentPathfindingTarget) <= _arrivalDistanceSqr)
+			if (HasArrived(ship) || HasPassed(ship))
 			{
 				ship.AdvancePathfindingPathTarget();
 			}
+		}
+
+		private bool HasPassed(EnemyShip ship)
+		{
+			Vector3 currentDirection = ship.CurrentPathfindingTarget - ship.GlobalPosition;
+			return ship.CurrentPathfindingDirection.Dot(currentDirection) <= 0;
+		}
+
+		private bool HasArrived(EnemyShip ship)
+		{
+			return ship.GlobalPosition.DistanceSquaredTo(ship.CurrentPathfindingTarget)
+							<= _arrivalDistanceSqr;
 		}
 	}
 }
