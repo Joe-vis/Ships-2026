@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 namespace GA.Ships
@@ -46,19 +47,18 @@ namespace GA.Ships
 			PerformActions(ship, processMode, deltaTime);
 		}
 
-		public AIStateID TryTransitioning(EnemyShip ship)
+		public IEnumerable<AIStateID> TryTransitioning(EnemyShip ship)
 		{
 			foreach (var transition in Transitions)
 			{
 				bool decision = transition.Condition.Decide(ship);
 				if (decision)
 				{
-					// TODO: Try to perform transition. Continue if fails.
-					return transition.TargetStateID;
+					yield return transition.TargetStateID;
 				}
 			}
 
-			return null;
+			yield break;
 		}
 
 		private void PerformActions(EnemyShip ship, ProcessMode processMode, float deltaTime)

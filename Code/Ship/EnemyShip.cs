@@ -94,6 +94,7 @@ namespace GA.Ships
 				}
 			}
 
+			Level.Current.DrawPath(pathfindingPath);
 			foreach(Vector3 cellPosition in pathfindingPath)
 			{
 				_pathfindingPath.Add(cellPosition);

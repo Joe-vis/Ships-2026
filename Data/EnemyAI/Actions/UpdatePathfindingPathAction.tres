@@ -5,4 +5,5 @@
 [resource]
 script = ExtResource("1_h06jo")
 _pathRefreshInterval = -1.0
+ProcessMode = 1
 metadata/_custom_type_script = "uid://o1efswonb3rh"

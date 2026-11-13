@@ -11,4 +11,5 @@ script = ExtResource("1_jkbh1")
 _angleSpeedCurve = SubResource("Curve_3cw8l")
 _maxAngle = 1.5707963267948966
 _breakingDistance = 0.06653975
+ProcessMode = 2
 metadata/_custom_type_script = "uid://bokmp25r4tbbf"

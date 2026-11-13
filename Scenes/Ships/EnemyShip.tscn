@@ -3,11 +3,16 @@
 [ext_resource type="PackedScene" uid="uid://bijs15liy45tx" path="res://Art/Models/GLB format/ship-pirate-small.glb" id="1_34l84"]
 [ext_resource type="Script" uid="uid://c0rxfmwdfuk4l" path="res://Code/Ship/EnemyShip.cs" id="2_elvtu"]
 [ext_resource type="Script" uid="uid://bbeubhgnw3on" path="res://Code/Ship/ShipVisual.cs" id="2_sypwe"]
+[ext_resource type="Script" uid="uid://bqxq3qvijcovc" path="res://Code/Ship/ShipData.cs" id="3_kvqdo"]
 [ext_resource type="Script" uid="uid://bmmpjjonaog84" path="res://Code/Ship/EnemyBrain.cs" id="4_diwfk"]
 [ext_resource type="Resource" uid="uid://8hf60kwk604f" path="res://Data/EnemyAI/States/Patrol.tres" id="5_2b00d"]
 [ext_resource type="Resource" uid="uid://d0omr00ixowl5" path="res://Data/EnemyAI/States/Chase.tres" id="6_kvqdo"]
 [ext_resource type="Script" uid="uid://ho260sd1auvl" path="res://Code/Ship/EnemyAI/AIStateSet.cs" id="7_e6xtg"]
 [ext_resource type="Resource" uid="uid://vsdy5obma0i6" path="res://Data/EnemyAI/States/IDs/PatrolID.tres" id="8_5obky"]
+
+[sub_resource type="Resource" id="Resource_0wsr5"]
+script = ExtResource("3_kvqdo")
+metadata/_custom_type_script = "uid://bqxq3qvijcovc"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_34l84"]
 radius = 2.1430664
@@ -20,6 +25,7 @@ metadata/_custom_type_script = "uid://ho260sd1auvl"
 
 [node name="SmallPirateShip" unique_id=1141487921 instance=ExtResource("1_34l84")]
 script = ExtResource("2_elvtu")
+_shipData = SubResource("Resource_0wsr5")
 
 [node name="ship-pirate-small" parent="." index="0" unique_id=358269408]
 script = ExtResource("2_sypwe")

@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_xpd3d")
+ProcessMode = 1
 metadata/_custom_type_script = "uid://dc7hnvf72jjh1"
